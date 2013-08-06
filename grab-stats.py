@@ -9,6 +9,7 @@ import re
 LOG_FILE = "/var/log/challenge/example.log"
 CARBON_SERVER = "127.0.0.1"
 CARBON_PORT = 2003
+DEBUG = False
 
 def tail(handle):
     handle.seek(0,2)
@@ -42,6 +43,8 @@ def main():
             carbon_msg = 'http.status.codes.5xx %s %d\n' % (status_code, int(time.time()))
 
         con.sendall(carbon_msg)
+        print "%s" % str(carbon_msg) if DEBUG else None
+
 
 
     con.close()
